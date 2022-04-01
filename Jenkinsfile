@@ -81,7 +81,7 @@ pipeline {
                     branch:"${BRANCH}",
                     imageTag:"${IMAGE_TAG}",
                     //credentialsId:'jenkins',
-                    load 'Jenkinsfile'
+                    build  'Job_deploy'
                 }
             }
         }
