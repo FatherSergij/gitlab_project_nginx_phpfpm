@@ -76,8 +76,11 @@ pipeline {
                 }
             } 
             steps {
-                dfdfdfxvzczvdfzsgrfdsgfbxdfbxcvbcv
-
+                git url: "git@github.com:FatherSergij/project_lib_deploy.git",
+                branch: ${BRANCH},
+                imageTag: ${IMAGE_TAG}
+                credentialsId:'jenkins',
+                load 'Jenkinsfile'
             }
         }
     }
