@@ -10,7 +10,7 @@ pipeline {
         IMAGE_REPO_NAME="bigproject"
         BRANCH="${env.BRANCH_NAME}"
         //IMAGE_TAG="${env.BRANCH_NAME}-svc1-v${env.BUILD_NUMBER}"
-        REPOSITORY_URI="${AWS_ACCOUNT_ID}.dkr.ecr.${AWS_REGION}.amazonaws.com/${IMAGE_REPO_NAME}"
+        REPOSITORY_URI="${AWS_ACCOUNT_ID}.dkr.ecr.${AWS_REGION}.amazonaws.com/${IMAGE_REPO_NAME}_${BRANCH}"
         IMAGE_TAG="${GIT_COMMIT}"        
     }    
     
@@ -82,7 +82,7 @@ pipeline {
                 //    branch:"${BRANCH}",
                 //    imageTag:"${IMAGE_TAG}",
                     //credentialsId:'jenkins',
-                    build job: 'Job_deploy', parameters: [string(name: 'BRANCHBUILD', value: env.BRANCH_NAME), 
+                    build job: 'Job_deploy', parameters: [string(name: 'Branch', value: env.BRANCH_NAME), 
                       string(name: 'ImageTag', value: GIT_COMMIT)]
                // }
             }
