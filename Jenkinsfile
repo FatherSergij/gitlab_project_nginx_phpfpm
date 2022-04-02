@@ -76,13 +76,13 @@ pipeline {
                 }
             } 
             steps {
-                script {
-                    git url:"git@github.com:FatherSergij/project_lib_deploy.git",
-                    branch:"${BRANCH}",
-                    imageTag:"${IMAGE_TAG}",
+                //script {
+               //     git url:"git@github.com:FatherSergij/project_lib_deploy.git",
+                //    branch:"${BRANCH}",
+                //    imageTag:"${IMAGE_TAG}",
                     //credentialsId:'jenkins',
                     build job: 'Job_deploy', parameters: [srtring(name: 'BRANCH', value: env.BRANCH_NAME)]
-                }
+               // }
             }
         }
     }
