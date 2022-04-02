@@ -1,7 +1,7 @@
 pipeline {
-    options {
-        buildDiscarder(logRotator(numToKeepStr: "5"))
-    }
+    //options {
+    //    buildDiscarder(logRotator(numToKeepStr: "5"))
+   // }
     agent any
     environment {
         IP_K8S="16.170.42.2"
@@ -81,7 +81,7 @@ pipeline {
                     branch:"${BRANCH}",
                     imageTag:"${IMAGE_TAG}",
                     //credentialsId:'jenkins',
-                    build  'Job_deploy'
+                    build job: 'Job_deploy', parameters: [srtring(name: 'BRANCH', value: env.BRANCH_NAME)]
                 }
             }
         }
