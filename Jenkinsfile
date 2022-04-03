@@ -84,7 +84,7 @@ pipeline {
                     //credentialsId:'jenkins',
                     build job: 'Job_deploy', parameters: [string(name: 'Branch_dev', value: env.BRANCH_NAME), 
                       string(name: 'ImageTag_dev', value: GIT_COMMIT),
-                      string(name: 'Service', value: "nginx")]
+                      string(name: 'Service_dev', value: "nginx")]
                // }
             }
         }
