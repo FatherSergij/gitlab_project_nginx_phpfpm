@@ -82,8 +82,8 @@ pipeline {
                 //    branch:"${BRANCH}",
                 //    imageTag:"${IMAGE_TAG}",
                     //credentialsId:'jenkins',
-                    build job: 'Job_deploy', parameters: [activeChoiceParam(name: 'Branch', value: env.BRANCH_NAME), 
-                      activeChoiceReactiveParam(name: 'ImageTag', value: GIT_COMMIT)]
+                    build job: 'Job_deploy', parameters: [activeChoiceParam(name: 'Branch_dep', value: env.BRANCH_NAME), 
+                      activeChoiceReactiveParam(name: 'ImageTag_dep', value: GIT_COMMIT)]
                // }
             }
         }
