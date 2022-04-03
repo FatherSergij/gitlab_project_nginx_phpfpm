@@ -9,7 +9,6 @@ pipeline {
         AWS_REGION="eu-north-1" 
         IMAGE_REPO_NAME="bigproject"
         BRANCH="${env.BRANCH_NAME}"
-        //IMAGE_TAG="${env.BRANCH_NAME}-svc1-v${env.BUILD_NUMBER}"
         REPOSITORY_URI="${AWS_ACCOUNT_ID}.dkr.ecr.${AWS_REGION}.amazonaws.com/${IMAGE_REPO_NAME}_nginx_${BRANCH}"
         IMAGE_TAG="${GIT_COMMIT}"        
     }    
