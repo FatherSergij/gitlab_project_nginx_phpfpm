@@ -1,7 +1,7 @@
 pipeline {
-    options {
-        buildDiscarder(logRotator(numToKeepStr: "5"))
-    }
+    //options {
+    //    buildDiscarder(logRotator(numToKeepStr: "5"))
+   // }
     agent any
     environment {
         IP_K8S="16.170.42.2"
@@ -9,8 +9,7 @@ pipeline {
         AWS_REGION="eu-north-1" 
         IMAGE_REPO_NAME="bigproject"
         BRANCH="${env.BRANCH_NAME}"
-        //IMAGE_TAG="${env.BRANCH_NAME}-svc1-v${env.BUILD_NUMBER}"
-        REPOSITORY_URI="${AWS_ACCOUNT_ID}.dkr.ecr.${AWS_REGION}.amazonaws.com/${IMAGE_REPO_NAME}_${BRANCH}"
+        REPOSITORY_URI="${AWS_ACCOUNT_ID}.dkr.ecr.${AWS_REGION}.amazonaws.com/${IMAGE_REPO_NAME}_nginx_${BRANCH}"
         IMAGE_TAG="${GIT_COMMIT}"        
     }    
     
@@ -76,8 +75,10 @@ pipeline {
                 }
             } 
             steps {
-                build job: 'Job_deploy', parameters: [string(name: 'Branch', value: env.BRANCH_NAME), 
-                string(name: 'ImageTag', value: GIT_COMMIT)]            }
+                build job: 'Job_deploy', parameters: [string(name: 'BranchRun_dev', value: env.BRANCH_NAME), 
+                  string(name: 'ImageTag_dev', value: GIT_COMMIT),
+                  string(name: 'ServiceRun_dev', value: "nginx")]
+            }
         }
     }
 }
