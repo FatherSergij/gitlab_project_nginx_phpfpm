@@ -83,7 +83,8 @@ pipeline {
                 //    imageTag:"${IMAGE_TAG}",
                     //credentialsId:'jenkins',
                     build job: 'Job_deploy', parameters: [string(name: 'Branch_dev', value: env.BRANCH_NAME), 
-                      string(name: 'ImageTag_dev', value: GIT_COMMIT)]
+                      string(name: 'ImageTag_dev', value: GIT_COMMIT),
+                      string(name: 'svc', value: "nginx")]
                // }
             }
         }
