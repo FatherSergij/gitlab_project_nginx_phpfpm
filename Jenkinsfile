@@ -15,7 +15,7 @@ pipeline {
             }
         }   
     
-         stage("Building and push image") {
+         stage("Build and push image") {
             when { 
                 allOf {
                     changeset "src/*"
