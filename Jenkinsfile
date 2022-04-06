@@ -15,7 +15,7 @@ pipeline {
             }
         }   
     
-         stage("Building image from branche nginx-phpfpm") {
+         stage("Build and push image") {
             when { 
                 allOf {
                     changeset "src/*"
@@ -33,7 +33,7 @@ pipeline {
         } 
 
 
-        stage("Deploy on k8s from nginx-phpfpm") {
+        stage("Deploy on k8s") {
             when { 
                 anyOf {
                     allOf {
