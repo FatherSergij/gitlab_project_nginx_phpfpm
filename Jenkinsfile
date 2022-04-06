@@ -40,7 +40,7 @@ pipeline {
             steps {
                 script {
                        //sh "docker build src/ -t ${IMAGE_REPO_NAME}:${IMAGE_TAG}"
-                    Build-Push()
+                    Build-Push(BRANCH_NAME, env.GIT_COMMIT, "nginx")
                 }
             }
         } 
