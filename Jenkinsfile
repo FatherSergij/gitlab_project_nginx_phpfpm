@@ -1,17 +1,5 @@
 pipeline {
-    //options {
-    //    buildDiscarder(logRotator(numToKeepStr: "5"))
-   // }
     agent any
-    // environment {
-    //     IP_K8S="16.170.42.2"
-    //     AWS_ACCOUNT_ID="728490037630"
-    //     AWS_REGION="eu-north-1" 
-    //     IMAGE_REPO_NAME="bigproject"
-    //     BRANCH="${env.BRANCH_NAME}"
-    //     REPOSITORY_URI="${AWS_ACCOUNT_ID}.dkr.ecr.${AWS_REGION}.amazonaws.com/${IMAGE_REPO_NAME}_nginx_${BRANCH}"
-    //     IMAGE_TAG="${GIT_COMMIT}"        
-    // }    
 
     libraries {
          lib('lib-for-project')
@@ -39,7 +27,6 @@ pipeline {
             }
             steps {
                 script {
-                       //sh "docker build src/ -t ${IMAGE_REPO_NAME}:${IMAGE_TAG}"
                     BuildPush(BRANCH_NAME, env.GIT_COMMIT, "nginx")
                 }
             }
