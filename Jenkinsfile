@@ -30,7 +30,9 @@ pipeline {
             }
             steps {
                 script {
-                    BuildPush(BRANCH_NAME, env.GIT_COMMIT, "nginx", BUILD_NUMBER)
+                    catchError() {                    
+                        BuildPush(BRANCH_NAME, env.GIT_COMMIT, "nginx", BUILD_NUMBER)
+                    }
                 }
             }
         } 
