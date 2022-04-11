@@ -31,8 +31,6 @@ pipeline {
             steps {
                 script {
                     BuildPush(BRANCH_NAME, "latest", "nginx", BUILD_NUMBER)
-                    }
-                    }
                 }
             }
         } 
