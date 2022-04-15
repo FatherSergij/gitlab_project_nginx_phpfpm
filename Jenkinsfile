@@ -53,7 +53,7 @@ pipeline {
               //  }
             } 
             steps {
-                build job: 'Job_deploy_helm', parameters: [string(name: 'BranchRun_dev', value: env.BRANCH_NAME), 
+                build job: 'Job_deploy', parameters: [string(name: 'BranchRun_dev', value: env.BRANCH_NAME), 
                   string(name: 'ImageTag_dev', value: "latest"),
                   string(name: 'ServiceRun_dev', value: "nginx")]
             }
