@@ -20,13 +20,13 @@ pipeline {
     
          stage("Build and push image") {
             when { 
-                allOf {
+               // allOf {
                     changeset "src/*"
-                    anyOf {
-                        not { triggeredBy cause: 'UserIdCause' }
-                        branch 'develop'
-                    }
-                }
+               //     anyOf {
+               //         not { triggeredBy cause: 'UserIdCause' }
+               //         branch 'develop'
+              //      }
+              //  }
             }
             steps {
                 script {
@@ -36,27 +36,27 @@ pipeline {
         } 
 
 
-        stage("Deploy on k8s") {
-            when { 
-                anyOf {
-                    allOf {
-                        branch 'develop'
-                        changeset "src/*"
-                    }
-                    allOf {
-                        triggeredBy cause: 'UserIdCause'
-                        anyOf {
-                            branch 'release'
-                            branch 'master'
-                        }
-                    }
-                }
-            } 
-            steps {
-                build job: 'Job_deploy', parameters: [string(name: 'BranchRun_dev', value: env.BRANCH_NAME), 
-                  string(name: 'ImageTag_dev', value: GIT_COMMIT),
-                  string(name: 'ServiceRun_dev', value: "nginx")]
-            }
-        }
+        //stage("Deploy on k8s") {
+        //    when { 
+        //        anyOf {
+        //            allOf {
+        //                branch 'develop'
+        //                changeset "src/*"
+        //            }
+        //            allOf {
+        //                triggeredBy cause: 'UserIdCause'
+        //                anyOf {
+        //                    branch 'release'
+        //                    branch 'master'
+        //                }
+        //            }
+        //        }
+        //    } 
+        //    steps {
+        //        build job: 'Job_deploy', parameters: [string(name: 'BranchRun_dev', value: env.BRANCH_NAME), 
+        //          string(name: 'ImageTag_dev', value: GIT_COMMIT),
+        //          string(name: 'ServiceRun_dev', value: "nginx")]
+        //    }
+        //}
     }
 }
