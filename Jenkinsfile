@@ -42,15 +42,15 @@ pipeline {
                 //    allOf {
                         branch 'develop'
                         changeset "src/*"
-               //     }
-               //     allOf {
+                //    }
+                //    allOf {
                 //        triggeredBy cause: 'UserIdCause'
                 //        anyOf {
-               //             branch 'release'
-               //             branch 'master'
-               //         }
-               //     }
-              //  }
+                //            branch 'release'
+                //            branch 'master'
+                //        }
+                //    }
+                //}
             } 
             steps {
                 build job: 'Job_deploy', parameters: [string(name: 'BranchRun_dev', value: env.BRANCH_NAME), 
