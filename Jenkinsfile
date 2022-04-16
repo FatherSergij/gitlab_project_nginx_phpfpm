@@ -22,11 +22,11 @@ pipeline {
             when { 
                 //allOf {
                     changeset "src/*"
-               //    anyOf {
-               //         not { triggeredBy cause: 'UserIdCause' }
-               //         branch 'develop'
-               //     }
-               // }
+                //   anyOf {
+                //        not { triggeredBy cause: 'UserIdCause' }
+                //        branch 'develop'
+                //    }
+                //}
             }
             steps {
                 script {
