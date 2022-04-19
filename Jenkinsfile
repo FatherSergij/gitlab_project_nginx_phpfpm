@@ -31,6 +31,18 @@ pipeline {
                     }                    
                 }
             }
-        } 
+        }
+
+
+        stage("Deploy on k8s") {
+            when { 
+                branch 'develop'
+                changeset "src/*"
+            } 
+            steps {
+                build job: 'Job_deploy', parameters: [string(name: 'BranchRun_dev', value: env.BRANCH_NAME), 
+                  string(name: 'ImageTag_dev', value: "latest")]
+            }
+        }         
     }
 }
