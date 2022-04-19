@@ -29,7 +29,6 @@ pipeline {
                     } else {
                         BuildPush(BRANCH_NAME, env.GIT_COMMIT, "node", BUILD_NUMBER)
                     }
-                    //esc
                 }
             }
         } 
