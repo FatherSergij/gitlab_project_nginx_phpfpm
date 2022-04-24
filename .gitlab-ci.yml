@@ -1,0 +1,56 @@
+include:
+  - project: 'FatherFedor/project_lib_deploy'
+    file: 
+      - '/lib/Logging.yml'
+      - '/lib/PushBuild.yml'
+
+variables:
+  IP_K8S: "16.170.42.2"
+  AWS_ACCOUNT_ID: "728490037630"
+  AWS_REGION: "eu-north-1" 
+  IMAGE_REPO_NAME: "bigproject"
+  SERVICE: "nginx"
+  TAG: "latest"
+  REPOSITORY_URI: "$AWS_ACCOUNT_ID.dkr.ecr.$AWS_REGION.amazonaws.com/${IMAGE_REPO_NAME}_${SERVICE}_$CI_COMMIT_BRANCH"
+
+stages:
+  - logging
+  - build
+  - deploy
+
+stage_logging_to_aws_ecr:
+  stage: logging
+  only:
+    changes:
+      - "src/*"
+  tags:
+    - shell
+  script:
+    - !reference [.logging, script]
+
+stage_build:
+  stage: build
+  only:
+    #refs:
+    #  - main    
+    changes:
+      - "src/*"  
+  tags: 
+    - shell
+  script:
+    - !reference [.pushbuild, script]
+
+
+Deploy_k8s:
+  variables:
+    BRANCHNG: "develop"
+    BRANCHND: "develop"
+    TAGNG: "latest"
+    TAGND: "latest"
+  stage: deploy
+  only:
+    refs:
+      - develop
+    changes:
+      - "src/*"     
+  trigger: FatherFedor/project_helmchart
