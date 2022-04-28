@@ -1,0 +1,48 @@
+include:
+  - project: 'FatherFedor/project_lib_deploy'
+    file: 
+      - '/lib/Variables.yml'
+      - '/lib/Logging.yml'
+      - '/lib/PushBuild.yml'
+
+variables:
+  SERVICE: "nginx"
+  TAG: "latest"
+  REPOSITORY_URI: "$AWS_ACCOUNT_ID.dkr.ecr.$AWS_REGION.amazonaws.com/${IMAGE_REPO_NAME}_${SERVICE}_$CI_COMMIT_BRANCH"
+  GIT_SUBMODULE_STRATEGY: recursive
+
+stages:
+  - logging
+  - build
+  - deploy
+
+logging_to_aws_ecr:
+  stage: logging
+  only:
+    changes:
+      - "src/*"
+  tags:
+    - shell
+  extends:
+    - .logging
+
+stage_build:
+  stage: build
+  only:
+    #refs:
+    #  - main    
+    changes:
+      - "src/*"  
+  tags: 
+    - shell
+  extends:
+    - .pushbuild   
+
+deploy_k8s:
+  variables:
+    BRANCH: $CI_COMMIT_BRANCH  
+  stage: deploy
+  only:
+    changes:
+      - "src/*"     
+  trigger: FatherFedor/project_helmchart
